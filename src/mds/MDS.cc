@@ -1519,8 +1519,8 @@ void MDS::replay_done()
 {
   dout(1) << "replay_done" << (standby_replaying ? " (as standby)" : "") << dendl;
 
-  if (is_oneshot_replay()) {
-    dout(2) << "hack.  journal looks ok.  shutting down." << dendl;
+  if (standby_type == MDSMap::STATE_ONESHOT_REPLAY) {
+    dout(1) << "Journal is valid.  Shutting down." << dendl;
     suicide();
     return;
   }
